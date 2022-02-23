@@ -44,3 +44,7 @@ npm run storybook
       - props: yes
       - state:
       - user:
+- InterviewerListItem
+  - props: id,name,avatar,selected, setInterviewer function
+  - state:
+  - components:
