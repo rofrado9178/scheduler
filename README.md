@@ -24,14 +24,23 @@ npm run storybook
 
 ### Component
 
+- App
+  - props: yes
+  - state: yes
+  - component:
+    - DayList
 - Button
-  - props
+
+  - props: yes
+  - state:
   - user:
     - many
-- DayListItem
-  - props
-  - user:
-    - DayList
+
 - DayList
-  - Props
-  - User:
+  - Props: yes
+  - state:
+  - component:
+    - DayListItem
+      - props: yes
+      - state:
+      - user:
