@@ -4,7 +4,7 @@ import classNames from "classnames";
 import InterviewerListItem from "./InterviewerListItem";
 
 export default function InterviewerList(props) {
-  const { interviewers } = props;
+  const interviewers = props.interviewers;
   const interviewerLists = interviewers.map((interviewer) => (
     <InterviewerListItem
       {...interviewer}

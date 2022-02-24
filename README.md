@@ -55,4 +55,4 @@ npm run storybook
 - Appointment
   - props:
   - state: Empty, Show, Form, Confirm, Status, Error
-  - component:
+  - component: Empty, Show, Form, Confirm, Status, Error
