@@ -5,12 +5,12 @@ import Empty from "./Empty";
 import Show from "./Show";
 
 export default function Appointment(props) {
-  console.log("this is props.interview", props.interview);
-  const setAppointment = function () {
-    return props.time
-      ? `Appointments at ${(<Header time={props.time} />)}`
-      : `No Appointments`;
-  };
+  // console.log("this is props.interview", props.interview);
+  // const setAppointment = function () {
+  //   return props.time
+  //     ? `Appointments at ${(<Header time={props.time} />)}`
+  //     : `No Appointments`;
+  // };
   return (
     <article className="appointment">
       <Header time={props.time} />
