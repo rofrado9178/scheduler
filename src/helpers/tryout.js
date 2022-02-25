@@ -17,7 +17,7 @@ const state = {
     "3": {
       id: 3,
       time: "2pm",
-      interview: { student: "Archie Cohen", interviewer: 2 },
+      interview: { student: "Archie Cohen", interviewer: 1 },
     },
     "4": { id: 4, time: "3pm", interview: null },
     "5": {
@@ -40,7 +40,7 @@ const state = {
   },
 };
 
-export function getAppointmentsForDay(state, day) {
+function getAppointmentsForDay(state, day) {
   const selectedAppointment = state.days.find((selectedDay) => {
     return selectedDay.name === day;
   });
@@ -52,10 +52,9 @@ export function getAppointmentsForDay(state, day) {
 
 // console.log(getAppointmentsForDay(state, "Monday"));
 
-export function getInterview(state, interview) {
-  if (!interview) {
-    return null;
-  }
+function getInterview(state, interview) {
   const interviewer = state.interviewers[interview.interviewer];
   return { ...interview, interviewer };
 }
+
+console.log(getInterview(state, { student: "Chad Takahashi", interviewer: 2 }));
