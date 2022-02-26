@@ -4,11 +4,13 @@ const state = {
       id: 1,
       name: "Monday",
       appointments: [1, 2, 3],
+      interviewers: [1, 2],
     },
     {
       id: 2,
       name: "Tuesday",
       appointments: [4, 5],
+      interviewers: [1, 2],
     },
   ],
   appointments: {
@@ -59,3 +61,15 @@ export function getInterview(state, interview) {
   const interviewer = state.interviewers[interview.interviewer];
   return { ...interview, interviewer };
 }
+
+export function getInterviewersForDay(state, day) {
+  const selectedAppointment = state.days.find((selectedDay) => {
+    return selectedDay.name === day;
+  });
+  if (state.days.length === 0 || selectedAppointment === undefined) {
+    return [];
+  }
+  return selectedAppointment.interviewers.map((id) => state.interviewers[id]);
+}
+
+// console.log(getInterviewersForDay(state, "Monday"));
