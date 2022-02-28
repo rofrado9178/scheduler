@@ -91,8 +91,27 @@ export default function Application(props) {
       [id]: appointment,
     };
     axios
-      .put("/api/appointments/:id", { params: id, appointment })
-      .then(setState({ ...state, appointments }));
+      .put(`/api/appointments/${id}`, { interview })
+      .then((response) => console.log("this is response", response))
+      .catch((error) => console.log(error));
+    setState({ ...state, appointments });
+  }
+
+  function deleteInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null,
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    axios
+      .delete(`/api/appointments/${id}`, { interview })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+    setState({ ...state, appointments });
   }
 
   //map all days
@@ -110,6 +129,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        deleteInterview={deleteInterview}
       />
     );
   });
