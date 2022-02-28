@@ -73,11 +73,27 @@ export default function Application(props) {
     interviewers: {},
   });
   // console.log("this is state.interviewers", state.interviewers);
+
   const dailyAppointment = getAppointmentsForDay(state, state.day);
 
   const setDay = (day) => {
     setState({ ...state, day });
   };
+
+  //book interview function
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    axios
+      .put("/api/appointments/:id", { params: id, appointment })
+      .then(setState({ ...state, appointments }));
+  }
 
   //map all days
   const eachAppointment = dailyAppointment.map((item) => {
@@ -86,12 +102,14 @@ export default function Application(props) {
     const interview = getInterview(state, item.interview);
     //passing the interviewers list to the create form
     const interviewers = getInterviewersForDay(state, state.day);
+
     return (
       <Appointment
         key={item.id}
         {...item}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });
