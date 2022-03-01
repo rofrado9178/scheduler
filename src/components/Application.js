@@ -10,24 +10,18 @@ import {
 import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
-  const { state, setDay, bookInterview, cancelInterview, setState } =
+  const { state, setDay, bookInterview, cancelInterview } =
     useApplicationData();
 
   const dailyAppointment = getAppointmentsForDay(state, state.day);
-  let spots = 0;
+
   //map all days
   const eachAppointment = dailyAppointment.map((item) => {
-    console.log("this is item.spots", item);
-
-    if (item.interview === null) {
-      spots += 1;
-    }
-
     //passing the interview schedule
     const interview = getInterview(state, item.interview);
     //passing the interviewers list to the create form
     const interviewers = getInterviewersForDay(state, state.day);
-    console.log("this is a state", state);
+
     return (
       <Appointment
         key={item.id}

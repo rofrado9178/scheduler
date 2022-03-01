@@ -28,6 +28,7 @@ export default function Form(props) {
             onChange={(event) => {
               setStudent(event.target.value);
             }}
+            data-testid="student-name-input"
             /*
           This must be a controlled component
           your code goes here
