@@ -10,18 +10,24 @@ import {
 import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
-  const { state, setDay, bookInterview, cancelInterview } =
+  const { state, setDay, bookInterview, cancelInterview, setState } =
     useApplicationData();
 
   const dailyAppointment = getAppointmentsForDay(state, state.day);
-  console.log("this is state.days.spots", state);
+  let spots = 0;
   //map all days
   const eachAppointment = dailyAppointment.map((item) => {
+    console.log("this is item.spots", item);
+
+    if (item.interview === null) {
+      spots += 1;
+    }
+
     //passing the interview schedule
     const interview = getInterview(state, item.interview);
     //passing the interviewers list to the create form
     const interviewers = getInterviewersForDay(state, state.day);
-
+    console.log("this is a state", state);
     return (
       <Appointment
         key={item.id}
@@ -43,7 +49,12 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={state.days} value={state.day} onChange={setDay} />
+          <DayList
+            days={state.days}
+            value={state.day}
+            onChange={setDay}
+            spotsCount={state.spots}
+          />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"

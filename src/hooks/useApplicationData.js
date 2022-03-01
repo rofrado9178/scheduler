@@ -8,7 +8,7 @@ export default function useApplicationData() {
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
     ]).then((all) => {
-      console.log("this is all", all);
+      // console.log("this is all", all);
       setState((prev) => ({
         ...prev,
         days: all[0].data,
@@ -27,7 +27,32 @@ export default function useApplicationData() {
 
   const setDay = (day) => {
     setState({ ...state, day });
+    console.log("this is from set day", state);
   };
+
+  function updateSpots(appointments) {
+    const currentDay = state.days.find((day) => {
+      return day.name === state.day;
+    });
+    const currentDayIndex = state.days.findIndex((day) => {
+      return day.name === state.day;
+    });
+
+    const nullAppointments = currentDay.appointments.filter((id) => {
+      return !appointments[id].interview;
+    });
+    let spots = nullAppointments.length;
+
+    const updateCurrentDay = {
+      ...currentDay,
+      spots,
+    };
+
+    let newDays = [...state.days];
+    newDays[currentDayIndex] = updateCurrentDay;
+
+    return newDays;
+  }
 
   function bookInterview(id, interview) {
     const appointment = {
@@ -38,9 +63,13 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    const days = updateSpots(appointments);
+    console.log("this is appointments", appointments);
+    console.log("this is appointmet", appointment);
+
     return axios
       .put(`/api/appointments/${id}`, { interview })
-      .then(() => setState({ ...state, appointments }));
+      .then(() => setState({ ...state, appointments, days }));
   }
 
   function cancelInterview(id) {
@@ -52,11 +81,12 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    const days = updateSpots(appointments);
 
     return axios
       .delete(`/api/appointments/${id}`)
-      .then(() => setState({ ...state, appointments }));
+      .then(() => setState({ ...state, appointments, days }));
   }
 
-  return { state, setDay, bookInterview, cancelInterview };
+  return { state, setDay, bookInterview, cancelInterview, setState };
 }
