@@ -4,8 +4,10 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
+  //set transition function to add new transition into array
   function transition(newMode, replace) {
     setMode(newMode);
+    //set replace to replace element in array if replace is true
     if (!replace) {
       setHistory((prev) => [...prev, newMode]);
     } else {
@@ -13,6 +15,7 @@ export default function useVisualMode(initial) {
     }
   }
 
+  //back state function
   function back() {
     if (history.length > 1) {
       setHistory((prev) => [...prev.slice(0, prev.length - 1)]);

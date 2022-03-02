@@ -9,23 +9,24 @@ import Confirm from "./Confirm";
 import Error from "./Error";
 
 import useVisualMode from "hooks/useVisualMode";
-
-const EMPTY = "EMPTY";
-const SHOW = "SHOW";
-const CREATE = "CREATE";
-const SAVING = "SAVING";
-const DELETE = "DELETE";
-const CONFIRM = "CONFIRM";
-const EDIT = "EDIT";
-const ERROR_SAVE = "ERROR_SAVE";
-const ERROR_DELETE = "ERROR_DELETE";
+//mode for transition
+const EMPTY = "EMPTY"; //for no interview display
+const SHOW = "SHOW"; //for showing the appointment
+const CREATE = "CREATE"; //to create the interview
+const SAVING = "SAVING"; //saving transition display
+const DELETE = "DELETE"; //delete transition display
+const CONFIRM = "CONFIRM"; //confirm transition display before delete
+const EDIT = "EDIT"; //transition to edit display component from show
+const ERROR_SAVE = "ERROR_SAVE"; //error when saving display
+const ERROR_DELETE = "ERROR_DELETE"; //error when delete
 
 export default function Appointment(props) {
-  // console.log("this is props from appointment:", props);
+  //using helper function to do transition
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
+  //saving transition
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -34,10 +35,18 @@ export default function Appointment(props) {
     transition(SAVING);
     props
       .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
-      .catch((error) => transition(ERROR_SAVE, true));
+      .then((response) => {
+        transition(SHOW);
+        console.log("this is response from appointment", response);
+      })
+      .catch((error) => {
+        console.log("this is error from catch appointment:", error);
+        transition(ERROR_SAVE, true);
+      });
   }
 
+  //cancel interview transition and
+  //delete it from data using deleteInterview function
   function cancel() {
     transition(DELETE, true);
     props
@@ -49,14 +58,6 @@ export default function Appointment(props) {
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {/* {props.interview ? (
-        <Show
-          student={props.interview.student}
-          interviewer={props.interview.interviewer.name}
-        />
-      ) : (
-        <Empty />
-      )} */}
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SAVING && <Status message={"Saving"} />}
       {mode === SHOW && (

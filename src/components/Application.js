@@ -10,6 +10,7 @@ import {
 import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
+  //import custom hooks from useAplication
   const { state, setDay, bookInterview, cancelInterview } =
     useApplicationData();
 
@@ -55,7 +56,6 @@ export default function Application(props) {
           src="images/lhl.png"
           alt="Lighthouse Labs"
         />
-        {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
       <section className="schedule">
         {eachAppointment}
