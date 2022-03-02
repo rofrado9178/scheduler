@@ -9,10 +9,9 @@ import {
 } from "helpers/selectors";
 import useApplicationData from "hooks/useApplicationData";
 
-export default function Application(props) {
+export default function Application() {
   //import custom hooks from useAplication
-  const { state, setDay, bookInterview, cancelInterview } =
-    useApplicationData();
+  const { state, bookInterview, cancelInterview } = useApplicationData();
 
   const dailyAppointment = getAppointmentsForDay(state, state.day);
 
