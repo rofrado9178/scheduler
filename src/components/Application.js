@@ -11,7 +11,8 @@ import useApplicationData from "hooks/useApplicationData";
 
 export default function Application() {
   //import custom hooks from useAplication
-  const { state, bookInterview, cancelInterview } = useApplicationData();
+  const { state, setDay, bookInterview, cancelInterview } =
+    useApplicationData();
 
   const dailyAppointment = getAppointmentsForDay(state, state.day);
 
