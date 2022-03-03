@@ -37,10 +37,8 @@ export default function Appointment(props) {
       .bookInterview(props.id, interview)
       .then((response) => {
         transition(SHOW);
-        console.log("this is response from appointment", response);
       })
       .catch((error) => {
-        console.log("this is error from catch appointment:", error);
         transition(ERROR_SAVE, true);
       });
   }
@@ -68,7 +66,6 @@ export default function Appointment(props) {
             transition(CONFIRM);
           }}
           onEdit={() => {
-            console.log(props);
             transition(EDIT);
           }}
         />

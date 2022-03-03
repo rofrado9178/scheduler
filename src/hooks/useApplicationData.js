@@ -28,7 +28,6 @@ export default function useApplicationData() {
   //change the state of each day function
   const setDay = (day) => {
     setState({ ...state, day });
-    console.log("this is from set day", state);
   };
 
   //change the spots state function everytime we update the state by add, delete
