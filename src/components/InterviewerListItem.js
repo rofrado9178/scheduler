@@ -5,15 +5,14 @@ import classNames from "classnames";
 //component to show the interviewer and selected interviewer
 export default function InterviewerListItem(props) {
   //add new class when get selected and change the scss with selected display
-  const selectInterviewer = classNames({
+  const selectInterviewer = classNames("interviewers__item", {
     "interviewers__item--selected": props.selected,
   });
   return (
     <li
-      className="interviewers__item"
+      className={selectInterviewer}
       key={props.id}
       onClick={props.setInterviewer}
-      className={selectInterviewer}
     >
       <img
         className="interviewers__item-image"
