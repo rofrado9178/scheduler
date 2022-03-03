@@ -44,37 +44,32 @@ npm test
 npm run storybook
 ```
 
+## Dependencies
+
+- axios
+- classnames
+- normalize.css
+- react
+- react-dom
+- react-scripts
+
+## Testing
+
+- Storybook(component testing)
+- Jest (unit testing)
+- Cypress (End to End Testing)
+
 ### Component
 
 - App
-  - props: yes
-  - state: yes
-  - component:
+  - child component:
     - DayList
 - Button
-
-  - props: yes
-  - state:
-  - user:
-    - many
-
 - DayList
-  - Props: yes
-  - state:
-  - component:
+  - child component:
     - DayListItem
-      - props: yes
-      - state:
-      - user:
 - InterviewerListItem
-  - props: id,name,avatar,selected, setInterviewer function
-  - state:
-  - components:
 - InterviewerList
-  - props:
-  - state:
-  - component: InterviewerListItem
+  - child component: InterviewerListItem
 - Appointment
-  - props:
-  - state: Empty, Show, Form, Confirm, Status, Error
-  - component: Empty, Show, Form, Confirm, Status, Error
+  - child component: Empty, Show, Form, Confirm, Status, Error
